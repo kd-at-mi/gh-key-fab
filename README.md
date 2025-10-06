@@ -61,7 +61,7 @@ The script is called from within an SSH config file using the `Match exec` direc
 | `--path <path>`         | `-p`  | **(Required)** The project directory path. Can be used multiple times.                 | `-p ~/work/client-a`  |
 | `--name <name>`         | `-n`  | **(Optional)** A friendly name to identify this key rule in the logs.                  | `-n "Work Key"`       |
 | `--log [path]`          | `-l`  | **(Optional)** Enables logging. If `[path]` is omitted, logs to `/tmp/gh-key-fab.log`. | `-l ~/.ssh/debug.log` |
-| `--log-max-lines <num>` | `-m`  | **(Optional)** Sets the max number of lines in the log file. Defaults to 1000.         | `-m 250`              |
+| `--log-max-lines <num>` | `-ml` | **(Optional)** Sets the max number of lines in the log file. Defaults to 1000.         | `-ml 250`             |
 
 ### Example Configuration
 
