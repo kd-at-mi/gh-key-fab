@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # gh-key-fab (Cross-Platform): A script to determine if the current path matches a set of rules.
-# Select paths with -p --path "/path"
 # Logging is disabled by default and can be enabled with -l or --log.
 # Logging can be tagged with -n --name value to help identify specific key triggers
 # Log files are auto trimmed to 1000 or set with -ml or --log-max-lines
@@ -57,7 +56,7 @@ log_trim() {
   fi
 }
 
-# --- Main script ---
+# --- Main script execution ---
 
 # Process all command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -108,8 +107,14 @@ for path in "${paths[@]}"; do
   # Expand tilde (~/) in the path
   expanded_path=${path/#\~/$HOME}
   
-  # Check if CWD starts with the specified path
-  if [[ "$CWD" == "$expanded_path"* ]]; then
+  # --- START: Applied Path Normalization ---
+  # Normalize both paths by removing any trailing slashes for a reliable comparison
+  normalized_cwd=${CWD%/}
+  normalized_path=${expanded_path%/}
+
+  # Check if the normalized CWD starts with the normalized configured path
+  if [[ "$normalized_cwd" == "$normalized_path"* ]]; then
+  # --- END: Applied Path Normalization ---
     log_debug "Result: MATCH"
     log_trim
     exit 0
